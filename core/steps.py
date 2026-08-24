@@ -1,6 +1,5 @@
 import subprocess
 import os
-import crypt
 from .events import ProgressObserver
 from .config import InstallConfig
 
@@ -41,13 +40,13 @@ def configure_system(config: InstallConfig, observer: ProgressObserver):
 
     # Users
     observer.on_progress(70, "users", "Configuring users")
-    encoded_root = crypt.crypt(config.root_password, crypt.mksalt(crypt.METHOD_SHA512))
-    chroot(["usermod", "-p", encoded_root, "root"])
+    
+    # Root password via chpasswd
+    subprocess.run(["arch-chroot", "/mnt", "chpasswd"], input=f"root:{config.root_password}\n", text=True, check=True)
 
     for user in config.users:
         chroot(["useradd", "-m", "-G", "wheel", user.username])
-        encoded_pass = crypt.crypt(user.password, crypt.mksalt(crypt.METHOD_SHA512))
-        chroot(["usermod", "-p", encoded_pass, user.username])
+        subprocess.run(["arch-chroot", "/mnt", "chpasswd"], input=f"{user.username}:{user.password}\n", text=True, check=True)
         if user.sudo:
             # Enable wheel group in sudoers safely
             sudoers_d_file = f"/mnt/etc/sudoers.d/{user.username}"

@@ -2,10 +2,10 @@ import argparse
 import json
 import sys
 from pydantic import ValidationError
-from archinstaller.core.config import InstallConfig
-from archinstaller.core.events import ProgressObserver
-from archinstaller.core.runner import Runner
-from archinstaller.core import disk
+from cyanide.core.config import InstallConfig
+from cyanide.core.events import ProgressObserver
+from cyanide.core.runner import Runner
+from cyanide.core import disk
 
 class CLIObserver(ProgressObserver):
     def on_progress(self, percent: int, stage: str, message: str):

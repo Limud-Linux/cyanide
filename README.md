@@ -26,13 +26,13 @@ pacman -Sy python python-pydantic python-gobject parted squashfs-tools
 To allow the GUI (running as a live user) to talk to the installer daemon (running as root), copy the D-Bus policy to your system directory:
 
 ```bash
-sudo cp dbus/org.archinstaller.conf /etc/dbus-1/system.d/
+sudo cp dbus/org.cyanide.conf /etc/dbus-1/system.d/
 sudo systemctl reload dbus
 ```
 
 ### 2. Running the Daemon
 
-Start the installer backend in daemon mode. This will bind to `org.archinstaller` on the system bus. It must be run as root.
+Start the installer backend in daemon mode. This will bind to `org.cyanide` on the system bus. It must be run as root.
 
 ```bash
 sudo python daemon.py

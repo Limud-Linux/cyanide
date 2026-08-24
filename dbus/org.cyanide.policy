@@ -4,7 +4,7 @@
  "http://www.freedesktop.org/standards/polkit-1/policyconfig.dtd">
 <policyconfig>
   <vendor>Arch Linux Installer</vendor>
-  <action id="org.archinstaller.install">
+  <action id="org.cyanide.install">
     <description>Run the Arch Linux Installer</description>
     <message>Authentication is required to execute the system installation</message>
     <defaults>

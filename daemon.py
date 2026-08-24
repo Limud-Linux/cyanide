@@ -11,10 +11,10 @@ from gi.repository import GLib
 # pydbus dynamically inspects the XML docstring.
 from pydbus import SystemBus
 
-from archinstaller.core.config import InstallConfig
-from archinstaller.core.events import ProgressObserver
-from archinstaller.core.runner import Runner
-from archinstaller.core import disk
+from cyanide.core.config import InstallConfig
+from cyanide.core.events import ProgressObserver
+from cyanide.core.runner import Runner
+from cyanide.core import disk
 
 class DBusObserver(ProgressObserver):
     def __init__(self, service):
@@ -30,7 +30,7 @@ class DBusObserver(ProgressObserver):
 class InstallerService:
     """
     <node>
-        <interface name='org.archinstaller.Service'>
+        <interface name='org.cyanide.Service'>
             <method name='ListDisks'>
                 <arg type='s' name='disks_json' direction='out'/>
             </method>
@@ -91,12 +91,12 @@ def main():
     bus = SystemBus()
     
     try:
-        bus.publish("org.archinstaller", InstallerService())
+        bus.publish("org.cyanide", InstallerService())
     except Exception as e:
         print(f"Failed to publish service. Ensure you are running as root and D-Bus policies are installed: {e}", file=sys.stderr)
         sys.exit(1)
 
-    print("D-Bus service 'org.archinstaller' is running.")
+    print("D-Bus service 'org.cyanide' is running.")
     loop = GLib.MainLoop()
     try:
         loop.run()

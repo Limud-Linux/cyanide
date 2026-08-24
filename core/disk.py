@@ -46,10 +46,14 @@ def partition_disk(config: InstallConfig, observer: ProgressObserver):
             sfdisk_script += f"size={part.size}, type={ptype}\n"
             
     observer.on_progress(10, "partitioning", "Creating partition table")
-    subprocess.run(["sfdisk", "--no-reread", disk], input=sfdisk_script, text=True, check=True)
     
+    # Use --wipe always to destroy old filesystem signatures on the new partitions
+    subprocess.run(["sfdisk", "--wipe", "always", disk], input=sfdisk_script, text=True, check=True)
+    
+    # Force kernel to re-read and udev to settle so device nodes (/dev/sda1) are ready
     subprocess.run(["partprobe", disk], check=False)
-    time.sleep(1)
+    subprocess.run(["udevadm", "settle"], check=False)
+    time.sleep(2)
     
     for i, part in enumerate(config.partitions):
         part_index = i + 1

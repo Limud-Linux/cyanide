@@ -11,10 +11,10 @@ from gi.repository import GLib
 # pydbus dynamically inspects the XML docstring.
 from pydbus import SystemBus
 
-from cyanide.core.config import InstallConfig
-from cyanide.core.events import ProgressObserver
-from cyanide.core.runner import Runner
-from cyanide.core import disk
+from core.config import InstallConfig
+from core.events import ProgressObserver
+from core.runner import Runner
+from core import disk
 
 class DBusObserver(ProgressObserver):
     def __init__(self, service):

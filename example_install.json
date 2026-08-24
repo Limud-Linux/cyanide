@@ -44,5 +44,5 @@
   "services": [
     "NetworkManager"
   ],
-  "offline_mode": true
+  "offline_mode": false
 }

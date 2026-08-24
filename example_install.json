@@ -1,0 +1,48 @@
+{
+  "disk": "/dev/sda",
+  "partitions": [
+    {
+      "type": "efi",
+      "size": "512M",
+      "fs": "fat32",
+      "mountpoint": "/boot"
+    },
+    {
+      "type": "swap",
+      "size": "4G",
+      "fs": "swap",
+      "mountpoint": "none"
+    },
+    {
+      "type": "root",
+      "size": "100%",
+      "fs": "ext4",
+      "mountpoint": "/"
+    }
+  ],
+  "locale": "en_US.UTF-8",
+  "timezone": "Europe/London",
+  "hostname": "cyanide-vm",
+  "root_password": "rootpassword123",
+  "users": [
+    {
+      "username": "daniel",
+      "password": "password123",
+      "sudo": true
+    }
+  ],
+  "bootloader": "grub",
+  "packages": [
+    "base",
+    "linux",
+    "linux-firmware",
+    "networkmanager",
+    "nano",
+    "sudo",
+    "btrfs-progs"
+  ],
+  "services": [
+    "NetworkManager"
+  ],
+  "offline_mode": true
+}

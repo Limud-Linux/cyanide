@@ -35,7 +35,7 @@ sudo systemctl reload dbus
 Start the installer backend in daemon mode. This will bind to `org.cyanide` on the system bus. It must be run as root.
 
 ```bash
-sudo python daemon.py
+sudo python cyanided.py
 ```
 
 ### 3. Testing with the CLI
@@ -43,12 +43,12 @@ sudo python daemon.py
 You can bypass the daemon and run an installation directly via the CLI using a JSON configuration file. 
 
 ```bash
-sudo python cli.py example_install.json
+sudo python cyanide-cli.py example_install.json
 ```
 
 To list available storage devices for testing:
 ```bash
-sudo python cli.py --list-disks
+sudo python cyanide-cli.py --list-disks
 ```
 
 ## Configuration Format
